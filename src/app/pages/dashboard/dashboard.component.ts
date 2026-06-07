@@ -1,15 +1,22 @@
 import { Component } from '@angular/core';
+
 import {
+  Chart,
+  registerables,
   ChartConfiguration,
   ChartOptions
 } from 'chart.js';
 
+// Register all Chart.js components
+Chart.register(...registerables);
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss'
+  styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
+
   displayedColumns: string[] = [
     'flight',
     'origin',
@@ -44,22 +51,41 @@ export class DashboardComponent {
     }
   ];
 
-  // CHART DATA
+  // Monthly Delay Analytics Chart
 
-  lineChartData: ChartConfiguration<'line'>['data'] = {
+  public lineChartData: ChartConfiguration<'line'>['data'] = {
     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
 
     datasets: [
       {
-        data: [12, 15, 18, 14, 20, 24],
         label: 'Delay Percentage',
+        data: [12, 15, 18, 14, 20, 24],
         fill: true,
         tension: 0.4
       }
     ]
   };
 
-  lineChartOptions: ChartOptions<'line'> = {
-    responsive: true
+  public lineChartOptions: ChartOptions<'line'> = {
+    responsive: true,
+    maintainAspectRatio: false,
+
+    plugins: {
+      legend: {
+        display: true,
+        position: 'top'
+      }
+    },
+
+    scales: {
+      y: {
+        beginAtZero: true,
+        title: {
+          display: true,
+          text: 'Delay %'
+        }
+      }
+    }
   };
+
 }
