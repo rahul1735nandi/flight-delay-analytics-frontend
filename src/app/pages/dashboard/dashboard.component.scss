@@ -1,0 +1,87 @@
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.dashboard-header h1 {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.dashboard-header p {
+  margin-top: 6px;
+  color: #64748b;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.dashboard-card {
+  padding: 24px;
+  border-radius: 20px;
+}
+
+.dashboard-card p {
+  color: #64748b;
+  margin: 0;
+}
+
+.dashboard-card h1 {
+  margin: 16px 0 10px;
+  font-size: 38px;
+  color: #0f172a;
+}
+
+.dashboard-card span {
+  color: #2563eb;
+  font-weight: 500;
+}
+
+.chart-card,
+.table-card {
+  padding: 24px;
+  border-radius: 20px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chart-container {
+  height: 400px;
+  margin-top: 20px;
+}
+
+.dashboard-table {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.mat-mdc-header-cell {
+  font-weight: 600;
+}
+
+.status-badge {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.delayed {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.on-time {
+  background: #dcfce7;
+  color: #16a34a;
+}

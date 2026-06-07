@@ -1,0 +1,82 @@
+.reports-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.reports-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.reports-header h1 {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.reports-header p {
+  margin-top: 5px;
+  color: #64748b;
+}
+
+.table-card {
+  border-radius: 18px;
+  overflow: hidden;
+  padding: 0;
+}
+
+.reports-table {
+  width: 100%;
+}
+
+.mat-mdc-header-row {
+  background: #f8fafc;
+}
+
+.mat-mdc-header-cell {
+  font-size: 15px;
+  font-weight: 600;
+  color: #0f172a;
+  padding: 18px;
+}
+
+.mat-mdc-cell {
+  padding: 18px;
+  font-size: 15px;
+}
+
+.mat-mdc-row:hover {
+  background: #f8fafc;
+}
+
+.delay-badge {
+  background: #dbeafe;
+  color: #1d4ed8;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+.status {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.high-delay {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.medium-delay {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.low-delay {
+  background: #dcfce7;
+  color: #16a34a;
+}

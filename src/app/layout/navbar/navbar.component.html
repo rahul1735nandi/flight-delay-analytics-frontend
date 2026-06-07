@@ -1,0 +1,28 @@
+<div class="top-header">
+
+  <div class="header-left">
+
+    <div class="logo-box">
+      <mat-icon>flight_takeoff</mat-icon>
+    </div>
+
+    <div>
+      <h2>Sky</h2>
+      <p>Flight Analytics Platform</p>
+    </div>
+
+  </div>
+
+  <!-- SHOW ONLY IN DASHBOARD -->
+
+  <button
+    *ngIf="router.url === '/dashboard'"
+    mat-raised-button
+    color="primary"
+    routerLink="/login">
+
+    Logout
+
+  </button>
+
+</div>

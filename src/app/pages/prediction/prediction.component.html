@@ -1,0 +1,37 @@
+<mat-card class="prediction-card">
+
+  <h2>Flight Delay Prediction</h2>
+
+  <div class="form-grid">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Origin Airport</mat-label>
+      <input matInput value="JFK">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Destination Airport</mat-label>
+      <input matInput value="LAX">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Month</mat-label>
+      <input matInput type="number" value="5">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Hour</mat-label>
+      <input matInput type="number" value="14">
+    </mat-form-field>
+
+  </div>
+
+  <button mat-raised-button color="primary">
+    Predict
+  </button>
+
+  <div class="result-box">
+    Prediction: Delayed
+  </div>
+
+</mat-card>
