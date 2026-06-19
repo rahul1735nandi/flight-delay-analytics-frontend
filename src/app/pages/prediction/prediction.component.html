@@ -2,36 +2,95 @@
 
   <h2>Flight Delay Prediction</h2>
 
+  <!-- Result Section -->
+  <div
+    *ngIf="predictionResult"
+    class="result-box"
+    [ngClass]="{
+      'delayed-card': predictionResult.is_delayed === 1,
+      'ontime-card': predictionResult.is_delayed === 0
+    }">
+
+    <div class="result-header">
+
+      <span>
+        {{ predictionResult.prediction }}
+      </span>
+
+    </div>
+
+    <p>
+      Delay Probability:
+      <strong>{{ predictionResult.delay_probability }}%</strong>
+    </p>
+
+  </div>
+
   <div class="form-grid">
 
     <mat-form-field appearance="outline">
       <mat-label>Origin Airport</mat-label>
-      <input matInput value="JFK">
+      <input
+        matInput
+        [(ngModel)]="formData.origin">
     </mat-form-field>
 
     <mat-form-field appearance="outline">
       <mat-label>Destination Airport</mat-label>
-      <input matInput value="LAX">
+      <input
+        matInput
+        [(ngModel)]="formData.dest">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Airline</mat-label>
+      <input
+        matInput
+        [(ngModel)]="formData.airline">
     </mat-form-field>
 
     <mat-form-field appearance="outline">
       <mat-label>Month</mat-label>
-      <input matInput type="number" value="5">
+      <input
+        matInput
+        type="number"
+        [(ngModel)]="formData.month">
     </mat-form-field>
 
     <mat-form-field appearance="outline">
-      <mat-label>Hour</mat-label>
-      <input matInput type="number" value="14">
+      <mat-label>Day Of Week</mat-label>
+      <input
+        matInput
+        type="number"
+        [(ngModel)]="formData.day_of_week">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Distance</mat-label>
+      <input
+        matInput
+        type="number"
+        [(ngModel)]="formData.distance">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Departure Time</mat-label>
+      <input
+        matInput
+        type="number"
+        [(ngModel)]="formData.crs_dep_time">
     </mat-form-field>
 
   </div>
 
-  <button mat-raised-button color="primary">
-    Predict
-  </button>
+  <button
+    mat-raised-button
+    color="primary"
+    class="predict-btn"
+    (click)="predictFlight()">
 
-  <div class="result-box">
-    Prediction: Delayed
-  </div>
+    Predict Flight
+
+  </button>
 
 </mat-card>
