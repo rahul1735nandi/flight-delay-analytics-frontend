@@ -39,39 +39,47 @@
 
     <mat-form-field appearance="outline">
       <mat-label>Origin Airport</mat-label>
-      <input
-        matInput
-        [(ngModel)]="formData.origin">
+      <mat-select [(ngModel)]="formData.origin">
+        <mat-option *ngFor="let airport of airports" [value]="airport">
+          {{airport}}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
       <mat-label>Destination Airport</mat-label>
-      <input
-        matInput
-        [(ngModel)]="formData.dest">
+      <mat-select [(ngModel)]="formData.dest">
+        <mat-option *ngFor="let airport of airports" [value]="airport">
+          {{airport}}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
       <mat-label>Airline</mat-label>
-      <input
-        matInput
-        [(ngModel)]="formData.airline">
+      <mat-select [(ngModel)]="formData.airline">
+        <mat-option *ngFor="let airline of airlines" [value]="airline">
+          {{airline}}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
       <mat-label>Month</mat-label>
-      <input
-        matInput
-        type="number"
-        [(ngModel)]="formData.month">
+      <mat-select [(ngModel)]="formData.month">
+        <mat-option *ngFor="let month of months" [value]="month.value">
+          {{ month.name }}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
       <mat-label>Day Of Week</mat-label>
-      <input
-        matInput
-        type="number"
-        [(ngModel)]="formData.day_of_week">
+      <mat-select [(ngModel)]="formData.day_of_week">
+        <mat-option *ngFor="let day of daysOfWeek" [value]="day?.value">
+          {{day.name}}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
 
     <mat-form-field appearance="outline">

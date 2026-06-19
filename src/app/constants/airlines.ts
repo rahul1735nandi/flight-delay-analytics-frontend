@@ -1,0 +1,16 @@
+export const AIRLINES = [
+    'AA',
+    'AS',
+    'B6',
+    'DL',
+    'F9',
+    'G4',
+    'HA',
+    'MQ',
+    'NK',
+    'OH',
+    'OO',
+    'UA',
+    'WN',
+    'YX',
+]

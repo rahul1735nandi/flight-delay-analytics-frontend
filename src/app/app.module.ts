@@ -23,6 +23,8 @@ import { PredictionComponent } from './pages/prediction/prediction.component';
 import { ReportsComponent } from './pages/reports/reports.component';
 import { LoginComponent } from './pages/login/login.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { MatOption } from "@angular/material/core";
+import { MatSelect } from "@angular/material/select";
 
 @NgModule({
   declarations: [
@@ -49,8 +51,10 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     MatTableModule,
     MatFormFieldModule,
     MatListModule,
-    BaseChartDirective
-  ],
+    BaseChartDirective,
+    MatOption,
+    MatSelect
+],
   providers: [
     provideAnimationsAsync()
   ],
