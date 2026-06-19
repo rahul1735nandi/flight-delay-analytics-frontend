@@ -12,17 +12,26 @@
     }">
 
     <div class="result-header">
-
-      <span>
-        {{ predictionResult.prediction }}
-      </span>
-
+      <div class="result-title">
+        <span class="status-icon">
+          {{ predictionResult.is_delayed === 1 ? '⚠️' : '✅' }}
+        </span>
+        <span class="prediction-text">
+          {{ predictionResult.prediction }}
+        </span>
+      </div>
+      <p class="probability-text">
+        Delay Probability:
+        <strong>{{ predictionResult.delay_probability }}%</strong>
+      </p>
     </div>
-
-    <p>
-      Delay Probability:
-      <strong>{{ predictionResult.delay_probability }}%</strong>
-    </p>
+    <div class="close-btn-container">
+      <button
+        class="close-btn"
+        (click)="closeResult()">
+          ✕
+      </button>
+    </div>
 
   </div>
 

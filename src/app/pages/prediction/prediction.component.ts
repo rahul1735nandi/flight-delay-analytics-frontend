@@ -11,13 +11,13 @@ import { FlightPredictionRequest, PredictionResponse } from '../../models/predic
 export class PredictionComponent {
 
   formData: FlightPredictionRequest = {
-    origin: 'JFK',
-    dest: 'ATL',
-    airline: 'DL',
+    origin: 'ORD',
+    dest: 'LGA',
+    airline: 'AA',
     month: 7,
-    day_of_week: 2,
-    distance: 700,
-    crs_dep_time: 900
+    day_of_week: 5,
+    distance: 733,
+    crs_dep_time: 1900
   }
 
   predictionResult?: PredictionResponse;
@@ -41,7 +41,7 @@ export class PredictionComponent {
     })
   }
 
-  // closeResult(): void {
-  //   this.predictionResult = undefined
-  // }
+  closeResult(): void {
+    this.predictionResult = undefined
+  }
 }

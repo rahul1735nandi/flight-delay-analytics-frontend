@@ -23,13 +23,43 @@
   border-radius: 12px;
   display: grid;
   row-gap: 15%;
+  grid-template-columns: 50% 50%;
 }
 
 .result-header {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
   align-items: center;
-  font-size: 25px;
+  row-gap: 10%;
+  margin-top: 5px;
+}
+
+.status-icon {
+  font-size: 28px;
+}
+
+.prediction-text {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.close-btn {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 22px;
+  font-weight: bold;
+  color: #666;
+  transition: all 0.2s ease;
+}
+
+.probability-text {
+  font-size: 18px;
+  margin-left: 1%;
+}
+
+.close-btn-container {
+  display: flex;
+  justify-content: end;
 }
 
 .ontime-card {
