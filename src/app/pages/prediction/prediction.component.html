@@ -28,13 +28,7 @@
   </div>
 
   <div class="form-grid">
-    <mat-form-field appearance="outline" [color]="
-            originField.touched &&
-            formData.origin &&
-            formData.origin === formData.dest
-              ? 'warn'
-              : 'primary'
-          ">
+    <mat-form-field appearance="outline" [ngClass]="{'invalid-airport': showOriginError(originField)}">
       <mat-label>Origin Airport</mat-label>
     
       <mat-select [(ngModel)]="formData.origin" #originField="ngModel">
@@ -43,18 +37,12 @@
         </mat-option>
       </mat-select>
     
-      <mat-hint class="airport-hint" *ngIf="originField.touched && formData.origin && formData.origin === formData.dest">
+      <mat-hint class="airport-hint" *ngIf="showOriginError(originField)">
         Origin and Destination airports cannot be the same
       </mat-hint>
     </mat-form-field>
     
-    <mat-form-field appearance="outline" [color]="
-            destField.touched &&
-            formData.dest &&
-            formData.origin === formData.dest
-              ? 'warn'
-              : 'primary'
-          ">
+    <mat-form-field appearance="outline" [ngClass]="{'invalid-airport': showDestinationError(destField)}">
     
       <mat-label>Destination Airport</mat-label>
     
@@ -64,7 +52,7 @@
         </mat-option>
       </mat-select>
     
-      <mat-hint class="airport-hint" *ngIf="destField.touched && formData.dest && formData.origin === formData.dest">
+      <mat-hint class="airport-hint" *ngIf="showDestinationError(destField)">
         Origin and Destination airports cannot be the same
       </mat-hint>
     
