@@ -15,13 +15,13 @@ import { DAYS_OF_WEEK } from '../../constants/days';
 export class PredictionComponent {
 
   formData: FlightPredictionRequest = {
-    origin: 'ORD',
-    dest: 'LGA',
-    airline: 'AA',
-    month: 7,
-    day_of_week: 5,
-    distance: 733,
-    crs_dep_time: 1900
+    origin: '',
+    dest: '',
+    airline: '',
+    month: null as any,
+    day_of_week: null as any,
+    distance: null as any,
+    crs_dep_time: null as any
   }
 
   months = MONTHS;
@@ -34,10 +34,12 @@ export class PredictionComponent {
   constructor(private predictionService: PredictionService) {}
 
   predictFlight():void {
+    this.predictionResult = undefined
+
     this.predictionService.predict(this.formData).subscribe({
       next: (response) => {
-        console.log("Prediction response => ",response);
-        this.predictionResult = response;
+        console.log("Prediction response => ",response)
+        this.predictionResult = response
 
         // setTimeout(() => {
         //   this.predictionResult = undefined;
@@ -45,12 +47,28 @@ export class PredictionComponent {
       },
       error: (error) => {
         console.error(error);
-        alert('Prediction Failed');
+        alert(error?.error?.detail ?? 'Prediction Failed');
       }
     })
   }
 
   closeResult(): void {
     this.predictionResult = undefined
+  }
+
+  hasAirportConflict(): boolean {
+    return !!(
+      this.formData?.origin &&
+      this.formData?.dest &&
+      this.formData?.origin === this.formData?.dest
+    )
+  }
+
+  showOriginError(originField: any): boolean {
+    return originField?.touched && this.hasAirportConflict()
+  }
+
+  showDestinationError(destField: any): boolean {
+    return destField?.touched && this.hasAirportConflict()
   }
 }

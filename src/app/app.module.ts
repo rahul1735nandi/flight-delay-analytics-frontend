@@ -25,6 +25,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatOption } from "@angular/material/core";
 import { MatSelect } from "@angular/material/select";
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { MatSelect } from "@angular/material/select";
     MatListModule,
     BaseChartDirective,
     MatOption,
-    MatSelect
+    MatSelect,
+    MatProgressBarModule
 ],
   providers: [
     provideAnimationsAsync()

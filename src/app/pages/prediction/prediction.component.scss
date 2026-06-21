@@ -72,6 +72,23 @@
   border-left: 6px solid #ef4444;
 }
 
+.airport-error {
+  grid-column: 1 / span 2;
+  color: #dc2626;
+  font-size: 14px;
+  margin-top: -10px;
+  margin-bottom: 5px;
+}
+
+.airport-hint {
+  color: #dc2626;
+}
+
+.predict-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 @media (max-width: 768px) {
   .form-grid {
     grid-template-columns: 1fr;

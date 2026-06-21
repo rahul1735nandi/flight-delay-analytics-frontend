@@ -1,12 +1,6 @@
 <mat-card class="prediction-card">
-
   <h2>Flight Delay Prediction</h2>
-
-  <!-- Result Section -->
-  <div
-    *ngIf="predictionResult"
-    class="result-box"
-    [ngClass]="{
+  <div *ngIf="predictionResult" class="result-box" [ngClass]="{
       'delayed-card': predictionResult.is_delayed === 1,
       'ontime-card': predictionResult.is_delayed === 0
     }">
@@ -25,41 +19,62 @@
         <strong>{{ predictionResult.delay_probability }}%</strong>
       </p>
     </div>
+
     <div class="close-btn-container">
-      <button
-        class="close-btn"
-        (click)="closeResult()">
-          ✕
+      <button class="close-btn" (click)="closeResult()">
+        ✕
       </button>
     </div>
-
   </div>
 
   <div class="form-grid">
-
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" [color]="
+            originField.touched &&
+            formData.origin &&
+            formData.origin === formData.dest
+              ? 'warn'
+              : 'primary'
+          ">
       <mat-label>Origin Airport</mat-label>
-      <mat-select [(ngModel)]="formData.origin">
+    
+      <mat-select [(ngModel)]="formData.origin" #originField="ngModel">
         <mat-option *ngFor="let airport of airports" [value]="airport">
-          {{airport}}
+          {{ airport }}
         </mat-option>
       </mat-select>
+    
+      <mat-hint class="airport-hint" *ngIf="originField.touched && formData.origin && formData.origin === formData.dest">
+        Origin and Destination airports cannot be the same
+      </mat-hint>
     </mat-form-field>
-
-    <mat-form-field appearance="outline">
+    
+    <mat-form-field appearance="outline" [color]="
+            destField.touched &&
+            formData.dest &&
+            formData.origin === formData.dest
+              ? 'warn'
+              : 'primary'
+          ">
+    
       <mat-label>Destination Airport</mat-label>
-      <mat-select [(ngModel)]="formData.dest">
+    
+      <mat-select [(ngModel)]="formData.dest" #destField="ngModel">
         <mat-option *ngFor="let airport of airports" [value]="airport">
-          {{airport}}
+          {{ airport }}
         </mat-option>
       </mat-select>
+    
+      <mat-hint class="airport-hint" *ngIf="destField.touched && formData.dest && formData.origin === formData.dest">
+        Origin and Destination airports cannot be the same
+      </mat-hint>
+    
     </mat-form-field>
 
     <mat-form-field appearance="outline">
       <mat-label>Airline</mat-label>
       <mat-select [(ngModel)]="formData.airline">
         <mat-option *ngFor="let airline of airlines" [value]="airline">
-          {{airline}}
+          {{ airline }}
         </mat-option>
       </mat-select>
     </mat-form-field>
@@ -76,38 +91,39 @@
     <mat-form-field appearance="outline">
       <mat-label>Day Of Week</mat-label>
       <mat-select [(ngModel)]="formData.day_of_week">
-        <mat-option *ngFor="let day of daysOfWeek" [value]="day?.value">
-          {{day.name}}
+        <mat-option *ngFor="let day of daysOfWeek" [value]="day.value">
+          {{ day.name }}
         </mat-option>
       </mat-select>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
       <mat-label>Distance</mat-label>
-      <input
-        matInput
-        type="number"
-        [(ngModel)]="formData.distance">
+      <input matInput type="number" min="1" placeholder="Enter Distance" [(ngModel)]="formData.distance">
+      <mat-error *ngIf="formData.distance <= 0">
+        Distance must be greater than 0
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
       <mat-label>Departure Time</mat-label>
-      <input
-        matInput
-        type="number"
-        [(ngModel)]="formData.crs_dep_time">
+      <input matInput type="number" min="0" max="2359" placeholder="Enter Departure Time" [(ngModel)]="formData.crs_dep_time">
+      <mat-error *ngIf="
+          formData.crs_dep_time == null ||
+          formData.crs_dep_time < 0 ||
+          formData.crs_dep_time > 2359
+        ">
+        Departure Time must be between 0000 and 2359
+      </mat-error>
     </mat-form-field>
-
   </div>
 
-  <button
-    mat-raised-button
-    color="primary"
-    class="predict-btn"
-    (click)="predictFlight()">
-
+  <button mat-raised-button color="primary" class="predict-btn" (click)="predictFlight()" [disabled]="
+      formData.origin === formData.dest ||
+      formData.distance <= 0 ||
+      formData.crs_dep_time < 0 ||
+      formData.crs_dep_time > 2359
+    ">
     Predict Flight
-
   </button>
-
 </mat-card>
