@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { DashboardService } from '../../services/dashboard.service';
+import { DashboardSummary, AirlineDelay, AirportDelay } from '../../models/dashboard.model';
 
 import {
   Chart,
@@ -6,8 +8,10 @@ import {
   ChartConfiguration,
   ChartOptions
 } from 'chart.js';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 
-// Register all Chart.js components
+
 Chart.register(...registerables);
 
 @Component({
@@ -15,43 +19,39 @@ Chart.register(...registerables);
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit, AfterViewInit {
+
+  constructor(private dashboardService: DashboardService) {}
+
+  dashboardSummary?: DashboardSummary;
+  airlineDelayData = new MatTableDataSource<AirlineDelay>();
+  airportDelayData = new MatTableDataSource<AirportDelay>();
+
+  @ViewChild(MatSort) sort!: MatSort;
+
+  ngOnInit(): void {
+    this.loadDashboardSummary();
+    this.loadMonthlyDelay();
+    this.loadAirlineDelay();
+    this.loadAirportDelay()
+  }
+
+  ngAfterViewInit(): void {
+    this.airlineDelayData.sort = this.sort;
+  }
 
   displayedColumns: string[] = [
-    'flight',
+    'op_unique_carrier',
+    'Total_Flights',
+    'Delayed_Flights',
+    'Delay_Rate'
+  ];
+  airportDisplayedColumns: string[] = [
     'origin',
-    'destination',
-    'status'
-  ];
-
-  recentFlights = [
-    {
-      flight: 'DL102',
-      origin: 'JFK',
-      destination: 'LAX',
-      status: 'Delayed'
-    },
-    {
-      flight: 'AA205',
-      origin: 'ORD',
-      destination: 'ATL',
-      status: 'On Time'
-    },
-    {
-      flight: 'UA890',
-      origin: 'SFO',
-      destination: 'MIA',
-      status: 'Delayed'
-    },
-    {
-      flight: 'SW440',
-      origin: 'SEA',
-      destination: 'DEN',
-      status: 'On Time'
-    }
-  ];
-
-  // Monthly Delay Analytics Chart
+    'Total_Flights',
+    'Delayed_Flights',
+    'Delay_Rate'
+  ]
 
   public lineChartData: ChartConfiguration<'line'>['data'] = {
     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
@@ -87,5 +87,79 @@ export class DashboardComponent {
       }
     }
   };
+
+  loadDashboardSummary(): void {
+    this.dashboardService?.getDashboardSummary().subscribe({
+      next: (response) => {
+        console.log("Dashboard response", response);
+        this.dashboardSummary = response;
+      },
+      error: (error) => {
+        console.error('Failed to load dashboard summary', error);
+      }
+    })
+  }
+
+  loadMonthlyDelay(): void {
+    this.dashboardService?.getMonthlyDelay().subscribe({
+      next: (response) => {
+        console.log("Monthly delay response", response);
+
+        this.lineChartData.labels = response.map(item => this.getMonthName(item.month));
+
+        this.lineChartData.datasets[0].data = response.map(item => item.Delay_Rate);
+
+        console.log('Chart Labels:', this.lineChartData.labels);
+        console.log('Chart Data:', this.lineChartData.datasets[0].data);
+
+        this.lineChartData = {...this.lineChartData};
+      },
+      error: (error) => {
+        console.error('Failed to load monthly delay data', error);
+      }
+    })
+  }
+
+  private getMonthName(month: number): string {
+    const months = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec'
+    ];
+    return months[month - 1]
+  }
+
+  loadAirlineDelay(): void {
+    this.dashboardService?.getAirlineDelay().subscribe({
+      next: (response) => {
+        console.log('Airline Delay Response', response);
+        this.airlineDelayData.data = response;
+      },
+      error: (error) => {
+        console.error('Failed to load airline delay data', error);
+      }
+    })
+  }
+
+  loadAirportDelay(): void {
+    this.dashboardService?.getAirportDelay().subscribe({
+      next: (response) => {
+        console.log("Airport Delay Response ",response);
+        this.airportDelayData.data = response;
+      },
+      error: (error) => {
+        console.error('Failed to load airport delay data ', error);
+      }
+    })
+  }
 
 }

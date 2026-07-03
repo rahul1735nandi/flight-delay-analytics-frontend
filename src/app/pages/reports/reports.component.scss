@@ -22,10 +22,24 @@
 }
 
 .table-card {
-  border-radius: 18px;
   overflow: hidden;
-  padding: 0;
+  padding: 20px 24px 0;
 }
+
+.table-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.search-field {
+  // width: 320px;
+  width: 100%;
+  max-width: 340px;
+  margin-bottom: 8px;
+}
+
 
 .reports-table {
   width: 100%;
@@ -44,39 +58,38 @@
 
 .mat-mdc-cell {
   padding: 18px;
-  font-size: 15px;
+  font-size: 13px;
 }
 
 .mat-mdc-row:hover {
   background: #f8fafc;
 }
 
-.delay-badge {
-  background: #dbeafe;
-  color: #1d4ed8;
+.total-flights {
   padding: 6px 12px;
   border-radius: 20px;
   font-weight: 600;
+  color: #1F379B;
 }
 
-.status {
-  padding: 6px 14px;
+.delayed-flights {
+  padding: 6px 12px;
   border-radius: 20px;
-  font-size: 13px;
+  font-weight: 600;
+  color: #1F379B;
+}
+
+.origin-badge {
+  background: #EAF1FD;
+  color: #1F379B;
+  padding: 5px 12px;
+  border-radius: 16px;
   font-weight: 600;
 }
-
-.high-delay {
-  background: #fee2e2;
-  color: #dc2626;
-}
-
-.medium-delay {
-  background: #fef3c7;
-  color: #d97706;
-}
-
-.low-delay {
-  background: #dcfce7;
-  color: #16a34a;
+.delay-rate-badge {
+  background: #FFF1E3;
+  color: #E66A00;
+  padding: 5px 12px;
+  border-radius: 16px;
+  font-weight: 600;
 }

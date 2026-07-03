@@ -17,65 +17,39 @@
   <!-- SUMMARY CARDS -->
 
   <div class="cards-grid">
-
     <mat-card class="dashboard-card">
-
       <p>Total Flights</p>
-
-      <h1>12,540</h1>
-
-      <span>+8.2% this month</span>
-
+      <h1>{{ dashboardSummary?.total_flights }}</h1>
+      <span>Total flights in the dataset</span>
     </mat-card>
 
     <mat-card class="dashboard-card">
-
       <p>Delayed Flights</p>
-
-      <h1>2,140</h1>
-
-      <span>17% delay rate</span>
-
+      <h1>{{ dashboardSummary?.delayed_flights }}</h1>
+      <span>{{ dashboardSummary?.delay_rate }}% delay rate</span>
     </mat-card>
 
     <mat-card class="dashboard-card">
-
       <p>On-Time Flights</p>
-
-      <h1>10,400</h1>
-
-      <span>83% success rate</span>
-
+      <h1>{{ dashboardSummary?.on_time_flights }}</h1>
+      <span>{{ 100 - (dashboardSummary?.delay_rate ?? 0) | number:'1.2-2' }}% success rate</span>
     </mat-card>
 
     <mat-card class="dashboard-card">
-
       <p>Average Delay</p>
-
-      <h1>28 min</h1>
-
-      <span>Across all airports</span>
-
+      <h1>{{ dashboardSummary?.average_delay }} min</h1>
+      <span>Across {{ dashboardSummary?.total_airports }} airports</span>
     </mat-card>
-
   </div>
 
   <!-- CHART SECTION -->
 
   <mat-card class="chart-card">
-
     <div class="section-header">
-
       <h2>Monthly Delay Analytics</h2>
-
-      <button mat-button color="primary">
-        View Details
-      </button>
-
     </div>
 
     <div class="chart-container">
-
       <canvas
         baseChart
         [data]="lineChartData"
@@ -83,109 +57,78 @@
         [type]="'line'">
 
       </canvas>
-
     </div>
-
   </mat-card>
 
-  <!-- RECENT FLIGHTS TABLE -->
+  <!-- AIRLINE DELAY REPORT -->
 
   <mat-card class="table-card">
 
     <div class="section-header">
-
-      <h2>Recent Flights</h2>
-
-      <button mat-button color="primary">
-        View All
-      </button>
-
+      <h2>Top Airlines by Delay Rate</h2>
     </div>
 
-    <table
-      mat-table
-      [dataSource]="recentFlights"
-      class="dashboard-table">
+    <div class="table-container">
+      <table
+        mat-table
+        [dataSource]="airlineDelayData"
+        matSort
+        class="dashboard-table">
 
-      <!-- Flight -->
+        <ng-container matColumnDef="op_unique_carrier">
+          <th mat-header-cell *matHeaderCellDef>
+            Airline
+          </th>
 
-      <ng-container matColumnDef="flight">
+          <td mat-cell *matCellDef="let element">
+            {{ element.op_unique_carrier }}
+          </td>
+        </ng-container>
 
-        <th mat-header-cell *matHeaderCellDef>
-          Flight
-        </th>
 
-        <td mat-cell *matCellDef="let element">
-          {{element.flight}}
-        </td>
+        <ng-container matColumnDef="Total_Flights">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Total Flights
+          </th>
 
-      </ng-container>
+          <td mat-cell *matCellDef="let element">
+            {{ element.Total_Flights | number }}
+          </td>
+        </ng-container>
 
-      <!-- Origin -->
 
-      <ng-container matColumnDef="origin">
+        <ng-container matColumnDef="Delayed_Flights">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Delayed Flights
+          </th>
 
-        <th mat-header-cell *matHeaderCellDef>
-          Origin
-        </th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.Delayed_Flights | number }}
+          </td>
+        </ng-container>
 
-        <td mat-cell *matCellDef="let element">
-          {{element.origin}}
-        </td>
 
-      </ng-container>
+        <ng-container matColumnDef="Delay_Rate">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Delay Rate
+          </th>
 
-      <!-- Destination -->
+          <td mat-cell *matCellDef="let element">
+            <span class="status-badge delayed">
+              {{ element.Delay_Rate | number:'1.2-2' }}%
+            </span>
+          </td>
+        </ng-container>
 
-      <ng-container matColumnDef="destination">
-
-        <th mat-header-cell *matHeaderCellDef>
-          Destination
-        </th>
-
-        <td mat-cell *matCellDef="let element">
-          {{element.destination}}
-        </td>
-
-      </ng-container>
-
-      <!-- Status -->
-
-      <ng-container matColumnDef="status">
-
-        <th mat-header-cell *matHeaderCellDef>
-          Status
-        </th>
-
-        <td mat-cell *matCellDef="let element">
-
-          <span
-            class="status-badge"
-            [ngClass]="{
-              'delayed': element.status === 'Delayed',
-              'on-time': element.status === 'On Time'
-            }">
-
-            {{element.status}}
-
-          </span>
-
-        </td>
-
-      </ng-container>
-
-      <tr
-        mat-header-row
-        *matHeaderRowDef="displayedColumns">
-      </tr>
-
-      <tr
-        mat-row
-        *matRowDef="let row; columns: displayedColumns;">
-      </tr>
-
-    </table>
-
+        <tr
+          mat-header-row
+          *matHeaderRowDef="displayedColumns">
+        </tr>
+        <tr
+          mat-row
+          *matRowDef="let row; columns: displayedColumns;">
+        </tr>
+      </table>
+    </div>
   </mat-card>
-
 </div>

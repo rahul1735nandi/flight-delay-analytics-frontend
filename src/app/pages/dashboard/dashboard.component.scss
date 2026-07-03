@@ -60,9 +60,21 @@
   margin-top: 20px;
 }
 
+.table-container {
+  max-height: 350px;
+  overflow-y: auto;
+}
+
+th.mat-header-cell,
+.mat-mdc-header-cell {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: white;
+}
+
 .dashboard-table {
   width: 100%;
-  margin-top: 20px;
 }
 
 .mat-mdc-header-cell {
@@ -72,13 +84,12 @@
 .status-badge {
   padding: 6px 14px;
   border-radius: 20px;
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 400;
 }
 
 .delayed {
-  background: #fee2e2;
-  color: #dc2626;
+  color: #1a1b1f;
 }
 
 .on-time {

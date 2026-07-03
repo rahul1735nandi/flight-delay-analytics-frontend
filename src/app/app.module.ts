@@ -26,6 +26,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { MatOption } from "@angular/material/core";
 import { MatSelect } from "@angular/material/select";
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSortModule, MatSort, MatSortHeader } from "@angular/material/sort";
+import { MatPaginator } from "@angular/material/paginator";
 
 @NgModule({
   declarations: [
@@ -55,7 +57,11 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     BaseChartDirective,
     MatOption,
     MatSelect,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatSort,
+    MatSortHeader,
+    MatSortModule,
+    MatPaginator
 ],
   providers: [
     provideAnimationsAsync()
