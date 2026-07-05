@@ -9,7 +9,7 @@ export interface FlightPredictionRequest {
 }
 
 export interface PredictionResponse {
-    is_delayed: number;
+    is_delayed: boolean;
     prediction: string;
     delay_probability: number;
 }

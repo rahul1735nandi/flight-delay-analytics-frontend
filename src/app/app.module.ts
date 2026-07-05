@@ -28,6 +28,7 @@ import { MatSelect } from "@angular/material/select";
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSortModule, MatSort, MatSortHeader } from "@angular/material/sort";
 import { MatPaginator } from "@angular/material/paginator";
+import { NgxMatTimepickerModule } from '@alexfriesen/ngx-mat-timepicker';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { MatPaginator } from "@angular/material/paginator";
     MatSort,
     MatSortHeader,
     MatSortModule,
-    MatPaginator
+    MatPaginator,
+    NgxMatTimepickerModule 
 ],
   providers: [
     provideAnimationsAsync()

@@ -72,14 +72,6 @@
   border-left: 6px solid #ef4444;
 }
 
-// .airport-error {
-//   grid-column: 1 / span 2;
-//   color: #dc2626;
-//   font-size: 14px;
-//   margin-top: -10px;
-//   margin-bottom: 5px;
-// }
-
 .airport-hint {
   color: #dc2626;
 }
@@ -101,7 +93,63 @@
   cursor: not-allowed;
 }
 
+.departure-time-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.time-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, .7);
+  margin-bottom: 8px;
+}
+
+.time-picker-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.hour-field {
+  width: 110px;
+}
+
+.minute-field {
+  width: 110px;
+}
+
+.meridian-field {
+  width: 120px;
+}
+
+.time-separator {
+  font-size: 24px;
+  font-weight: 700;
+  color: #555;
+  margin-top: -18px;
+}
+
+.time-picker-container .mat-mdc-form-field-subscript-wrapper {
+  display: none;
+}
+
+.hour-field .mat-mdc-text-field-wrapper,
+.minute-field .mat-mdc-text-field-wrapper,
+.meridian-field .mat-mdc-text-field-wrapper {
+  height: 56px;
+}
+
+.hour-field .mat-mdc-form-field-flex,
+.minute-field .mat-mdc-form-field-flex,
+.meridian-field .mat-mdc-form-field-flex {
+  align-items: center;
+}
+
 @media (max-width: 768px) {
+
   .form-grid {
     grid-template-columns: 1fr;
   }
@@ -110,5 +158,19 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
+  }
+
+  .time-picker-container {
+    flex-wrap: wrap;
+  }
+
+  .hour-field,
+  .minute-field,
+  .meridian-field {
+    width: 100%;
+  }
+
+  .time-separator {
+    display: none;
   }
 }
