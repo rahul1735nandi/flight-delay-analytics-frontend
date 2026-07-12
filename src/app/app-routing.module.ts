@@ -4,9 +4,11 @@ import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { PredictionComponent } from './pages/prediction/prediction.component';
 import { ReportsComponent } from './pages/reports/reports.component';
+import { RegisterComponent } from './pages/register/register.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
+  {path: 'register', component: RegisterComponent},
   {path: 'dashboard', component: DashboardComponent},
   {path: 'prediction', component: PredictionComponent},
   {path: 'reports', component: ReportsComponent},

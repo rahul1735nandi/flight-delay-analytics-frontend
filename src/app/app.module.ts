@@ -29,6 +29,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSortModule, MatSort, MatSortHeader } from "@angular/material/sort";
 import { MatPaginator } from "@angular/material/paginator";
 import { NgxMatTimepickerModule } from '@alexfriesen/ngx-mat-timepicker';
+import { RegisterComponent } from './pages/register/register.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { NgxMatTimepickerModule } from '@alexfriesen/ngx-mat-timepicker';
     DashboardComponent,
     PredictionComponent,
     ReportsComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

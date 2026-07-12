@@ -1,12 +1,11 @@
 <div class="login-container">
-
   <mat-card class="login-card">
     <div class="header-container">
       <div class="logo-box">
         <mat-icon>flight_takeoff</mat-icon>
       </div>
       <div>
-        <h1 class="title">Sky Login</h1>
+        <h1 class="title">Create Account</h1>
       </div>
     </div>
 
@@ -26,15 +25,32 @@
         [type]="hidePassword ? 'password' : 'text'"
         [(ngModel)]="password"
         placeholder="Enter your password">
-
       <button
         mat-icon-button
         matSuffix
         type="button"
         (click)="hidePassword = !hidePassword">
-
         <mat-icon>
           {{ hidePassword ? 'visibility' : 'visibility_off' }}
+        </mat-icon>
+      </button>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Confirm Password</mat-label>
+      <input
+        matInput
+        [type]="hideConfirmPassword ? 'password' : 'text'"
+        [(ngModel)]="confirmPassword"
+        placeholder="Confirm your password">
+      <button
+        mat-icon-button
+        matSuffix
+        type="button"
+        (click)="hideConfirmPassword = !hideConfirmPassword">
+
+        <mat-icon>
+          {{ hideConfirmPassword ? 'visibility' : 'visibility_off' }}
         </mat-icon>
       </button>
     </mat-form-field>
@@ -47,14 +63,14 @@
       mat-raised-button
       color="primary"
       class="login-btn"
-      (click)="login()"
-      [disabled]="!email || !password">
-        Login
+      (click)="register()"
+      [disabled]="!email || !password || !confirmPassword">
+        Register
     </button>
 
     <div class="register-link">
-      <span>Don't have an account?</span>
-      <a routerLink="/register">Register</a>
+      <span>Already have an account?</span>
+      <a routerLink="/login">Login</a>
     </div>
   </mat-card>
 </div>

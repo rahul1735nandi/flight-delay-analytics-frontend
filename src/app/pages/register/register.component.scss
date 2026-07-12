@@ -3,17 +3,19 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+
   background: linear-gradient(
     135deg,
     #2563eb 0%,
     #3b82f6 45%,
     #60a5fa 100%
   );
+
   padding: 20px;
 }
 
 .login-card {
-  width: 400px;
+  width: 530px;
   padding: 40px;
   border-radius: 20px;
   display: flex;
