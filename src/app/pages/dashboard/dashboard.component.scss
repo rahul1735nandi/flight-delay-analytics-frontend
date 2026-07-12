@@ -47,6 +47,7 @@
 .table-card {
   padding: 24px;
   border-radius: 20px;
+  margin-top: 5%;
 }
 
 .section-header {
@@ -75,17 +76,41 @@ th.mat-header-cell,
 
 .dashboard-table {
   width: 100%;
+
+  .airline-badge {
+    background: #EAF1FD;
+    color: #1F379B;
+    padding: 5px 12px;
+    border-radius: 16px;
+    font-weight: 600;
+  }
+
+  .total-flights {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+    color: #1F379B;
+  }
+
+  .delayed-flights {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+    color: #1F379B;
+  }
+
+  .status-badge {
+    background: #FFF1E3;
+    color: #E66A00;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+  }
 }
 
 .mat-mdc-header-cell {
   font-weight: 600;
-}
-
-.status-badge {
-  padding: 6px 14px;
-  border-radius: 20px;
-  font-size: 14px;
-  font-weight: 400;
 }
 
 .delayed {

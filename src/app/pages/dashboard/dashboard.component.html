@@ -81,7 +81,9 @@
           </th>
 
           <td mat-cell *matCellDef="let element">
-            {{ element.op_unique_carrier }}
+            <span class="airline-badge">
+              {{ element.op_unique_carrier }}
+            </span>
           </td>
         </ng-container>
 
@@ -92,7 +94,9 @@
           </th>
 
           <td mat-cell *matCellDef="let element">
-            {{ element.Total_Flights | number }}
+            <span class="total-flights">
+              {{ element.Total_Flights | number }}
+            </span>
           </td>
         </ng-container>
 
@@ -103,7 +107,9 @@
           </th>
 
           <td mat-cell *matCellDef="let element">
-            {{ element.Delayed_Flights | number }}
+            <span class="delayed-flights">
+              {{ element.Delayed_Flights | number }}
+            </span>
           </td>
         </ng-container>
 
