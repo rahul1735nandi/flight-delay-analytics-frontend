@@ -19,7 +19,7 @@
     *ngIf="router.url === '/dashboard'"
     mat-raised-button
     class="logout-btn"
-    routerLink="/login">
+    (click)="logout()">
       Logout
   </button>
 

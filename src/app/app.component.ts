@@ -10,4 +10,10 @@ export class AppComponent {
 
   constructor(public router: Router) {}
 
+  showLayout(): boolean {
+    return !(
+      this.router.url === '/login' || this.router.url === '/register'
+    );
+  }
+
 }

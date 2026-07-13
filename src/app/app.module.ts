@@ -30,6 +30,8 @@ import { MatSortModule, MatSort, MatSortHeader } from "@angular/material/sort";
 import { MatPaginator } from "@angular/material/paginator";
 import { NgxMatTimepickerModule } from '@alexfriesen/ngx-mat-timepicker';
 import { RegisterComponent } from './pages/register/register.component';
+import { LogoutDialogComponent } from './pages/logout-dialog/logout-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,8 @@ import { RegisterComponent } from './pages/register/register.component';
     PredictionComponent,
     ReportsComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    LogoutDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +68,8 @@ import { RegisterComponent } from './pages/register/register.component';
     MatSortHeader,
     MatSortModule,
     MatPaginator,
-    NgxMatTimepickerModule 
+    NgxMatTimepickerModule,
+    MatDialogModule
 ],
   providers: [
     provideAnimationsAsync()
