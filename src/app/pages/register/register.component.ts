@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-register',
@@ -15,7 +16,7 @@ export class RegisterComponent {
   hideConfirmPassword = true;
   errorMessage = '';
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(private router: Router, private authService: AuthService, private notificationService: NotificationService) {}
 
   register(): void {
     this.errorMessage = '';
@@ -29,7 +30,7 @@ export class RegisterComponent {
       password: this.password
     }).subscribe({
       next: (response) => {
-        alert(response.message);
+        this.notificationService.success(response.message)
         this.router.navigate(['/login'])
       },
       error: (error) => {

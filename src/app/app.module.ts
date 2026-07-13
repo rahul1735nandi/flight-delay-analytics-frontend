@@ -32,6 +32,9 @@ import { NgxMatTimepickerModule } from '@alexfriesen/ngx-mat-timepicker';
 import { RegisterComponent } from './pages/register/register.component';
 import { LogoutDialogComponent } from './pages/logout-dialog/logout-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { LoadingSpinnerComponent } from './pages/loading-spinner/loading-spinner.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -43,7 +46,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     ReportsComponent,
     LoginComponent,
     RegisterComponent,
-    LogoutDialogComponent
+    LogoutDialogComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,
@@ -69,7 +73,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatSortModule,
     MatPaginator,
     NgxMatTimepickerModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule
 ],
   providers: [
     provideAnimationsAsync()
