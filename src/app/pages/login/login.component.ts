@@ -36,7 +36,7 @@ export class LoginComponent {
       },
       error: (error) => {
         this.errorMessage = error?.error?.detail || 'Invalid email or password';
-        this.notificationService.error('❌ Invalid email or password')
+        this.notificationService.error("❌ " + error?.error?.detail || '❌ Invalid email or password')
       }
     })
   }
