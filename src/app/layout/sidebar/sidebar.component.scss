@@ -21,8 +21,21 @@
   color: white;
   justify-content: flex-start;
   margin-bottom: 10px;
+  transition: all 0.2s ease;
 }
 
-.sidebar a:hover {
+.sidebar a:hover:not(.active-link) {
   background: rgba(255,255,255,0.1);
+  border-radius: none;
+}
+
+.sidebar a.active-link {
+  background: #2563eb;
+  color: white;
+  border-radius: none;
+  font-weight: 600;
+}
+
+.sidebar a.active-link mat-icon {
+  color: white;
 }

@@ -7,14 +7,24 @@ import { BehaviorSubject } from 'rxjs';
 export class LoadingService {
   private loadingSubject = new BehaviorSubject<boolean>(false);
   loading$ = this.loadingSubject.asObservable();
+  private requestCount = 0;
 
   constructor() { }
 
   show(): void {
+    this.requestCount++;
     this.loadingSubject.next(true);
   }
 
   hide(): void {
-    this.loadingSubject.next(false);
+    if(this.requestCount > 0) {
+      this.requestCount--;
+    }
+    if(this.requestCount === 0) {
+      // this.loadingSubject.next(false);
+      setTimeout(() => {
+        this.loadingSubject.next(false);
+      }, 500);
+    }
   }
 }

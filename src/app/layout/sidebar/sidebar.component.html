@@ -5,17 +5,21 @@
     <span>Sky</span>
   </div>
 
-  <a mat-button routerLink="/dashboard">
-    <mat-icon>dashboard</mat-icon>
-    Dashboard
+  <a
+    mat-button
+    routerLink="/dashboard"
+    routerLinkActive="active-link"
+    [routerLinkActiveOptions]="{ exact: true }">
+      <mat-icon>dashboard</mat-icon>
+        Dashboard
   </a>
 
-  <a mat-button routerLink="/prediction">
+  <a mat-button routerLink="/prediction" routerLinkActive="active-link">
     <mat-icon>analytics</mat-icon>
     Prediction
   </a>
 
-  <a mat-button routerLink="/reports">
+  <a mat-button routerLink="/reports" routerLinkActive="active-link">
     <mat-icon>description</mat-icon>
     Reports
   </a>
