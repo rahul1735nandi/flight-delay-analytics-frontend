@@ -1,60 +1,63 @@
 <div class="login-container">
-
-  <mat-card class="login-card">
-    <div class="header-container">
-      <div class="logo-box">
-        <mat-icon>flight_takeoff</mat-icon>
+  <form (ngSubmit)="login()">
+    <mat-card class="login-card">
+      <div class="header-container">
+        <div class="logo-box">
+          <mat-icon>flight_takeoff</mat-icon>
+        </div>
+        <div>
+          <h1 class="title">Sky Login</h1>
+        </div>
       </div>
-      <div>
-        <h1 class="title">Sky Login</h1>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          type="email"
+          name="email"
+          [(ngModel)]="email"
+          placeholder="Enter your email">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          [type]="hidePassword ? 'password' : 'text'"
+          name="password"
+          [(ngModel)]="password"
+          placeholder="Enter your password">
+
+        <button
+          mat-icon-button
+          matSuffix
+          type="button"
+          (click)="hidePassword = !hidePassword">
+
+          <mat-icon>
+            {{ hidePassword ? 'visibility' : 'visibility_off' }}
+          </mat-icon>
+        </button>
+      </mat-form-field>
+
+      <div class="error-message" *ngIf="errorMessage">
+        {{ errorMessage }}
       </div>
-    </div>
-
-    <mat-form-field appearance="outline">
-      <mat-label>Email</mat-label>
-      <input
-        matInput
-        type="email"
-        [(ngModel)]="email"
-        placeholder="Enter your email">
-    </mat-form-field>
-
-    <mat-form-field appearance="outline">
-      <mat-label>Password</mat-label>
-      <input
-        matInput
-        [type]="hidePassword ? 'password' : 'text'"
-        [(ngModel)]="password"
-        placeholder="Enter your password">
 
       <button
-        mat-icon-button
-        matSuffix
-        type="button"
-        (click)="hidePassword = !hidePassword">
-
-        <mat-icon>
-          {{ hidePassword ? 'visibility' : 'visibility_off' }}
-        </mat-icon>
+        mat-raised-button
+        color="primary"
+        class="login-btn"
+        type="submit"
+        [disabled]="!email || !password">
+          Login
       </button>
-    </mat-form-field>
 
-    <div class="error-message" *ngIf="errorMessage">
-      {{ errorMessage }}
-    </div>
-
-    <button
-      mat-raised-button
-      color="primary"
-      class="login-btn"
-      (click)="login()"
-      [disabled]="!email || !password">
-        Login
-    </button>
-
-    <div class="register-link">
-      <span>Don't have an account?</span>
-      <a routerLink="/register">Register</a>
-    </div>
-  </mat-card>
+      <div class="register-link">
+        <span>Don't have an account?</span>
+        <a routerLink="/register">Register</a>
+      </div>
+    </mat-card>
+  </form>
 </div>
