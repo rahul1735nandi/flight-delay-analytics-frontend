@@ -26,6 +26,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   dashboardSummary?: DashboardSummary;
   airlineDelayData = new MatTableDataSource<AirlineDelay>();
   airportDelayData = new MatTableDataSource<AirportDelay>();
+  hasDashboardError = false;
 
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -96,6 +97,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       },
       error: (error) => {
         console.error('Failed to load dashboard summary', error);
+        this.hasDashboardError = true;
       }
     })
   }
@@ -104,18 +106,15 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.dashboardService?.getMonthlyDelay().subscribe({
       next: (response) => {
         console.log("Monthly delay response", response);
-
         this.lineChartData.labels = response.map(item => this.getMonthName(item.month));
-
         this.lineChartData.datasets[0].data = response.map(item => item.Delay_Rate);
-
         console.log('Chart Labels:', this.lineChartData.labels);
         console.log('Chart Data:', this.lineChartData.datasets[0].data);
-
         this.lineChartData = {...this.lineChartData};
       },
       error: (error) => {
         console.error('Failed to load monthly delay data', error);
+        this.hasDashboardError = true;
       }
     })
   }
@@ -146,6 +145,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       },
       error: (error) => {
         console.error('Failed to load airline delay data', error);
+        this.hasDashboardError = true;
       }
     })
   }
@@ -158,6 +158,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       },
       error: (error) => {
         console.error('Failed to load airport delay data ', error);
+        this.hasDashboardError = true;
       }
     })
   }

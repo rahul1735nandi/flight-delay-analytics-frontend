@@ -40,6 +40,8 @@ export class ReportsComponent implements OnInit, AfterViewInit {
 
   dataSource = new MatTableDataSource<AirportDelay>();
   predictionHistoryDataSource = new MatTableDataSource<any>();
+  hasAirportDelayError = false;
+  hasPredictionHistoryError = false;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -60,10 +62,12 @@ export class ReportsComponent implements OnInit, AfterViewInit {
     this.dashboardService.getAirportDelay().subscribe({
       next: (response) => {
         console.log("Airport Delay Response ", response);
+        this.hasAirportDelayError = false;
         this.dataSource.data = response;
       },
       error: (error) => {
         console.error('Failed to load airport delay data ', error);
+        this.hasAirportDelayError = true;
       }
     })
   }
@@ -124,6 +128,7 @@ export class ReportsComponent implements OnInit, AfterViewInit {
   loadPredictionHistory(): void {
     this.predictionHistoryService.getPredictionHistory().subscribe({
       next: (response) => {
+        this.hasPredictionHistoryError = false;
         console.log("Prediction History", response);
         this.predictionHistoryDataSource.data = response;
 
@@ -133,6 +138,7 @@ export class ReportsComponent implements OnInit, AfterViewInit {
       },
       error: (error) => {
         console.error("Failed to load prediction history", error);
+        this.hasPredictionHistoryError = true;
       }
     })
   }
