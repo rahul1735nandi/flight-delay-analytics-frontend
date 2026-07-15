@@ -45,6 +45,10 @@
   width: 100%;
 }
 
+.airport-delay-report-paginator {
+  margin-bottom: 20px;
+}
+
 .mat-mdc-header-row {
   background: #f8fafc;
 }
@@ -92,4 +96,52 @@
   padding: 5px 12px;
   border-radius: 16px;
   font-weight: 600;
+}
+
+.history-title {
+  margin: 30px 0 15px;
+  font-size: 22px;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.prediction-badge {
+  padding: 6px 14px;
+  border-radius: 18px;
+  font-weight: 600;
+  font-size: 13px;
+  display: inline-block;
+  text-align: center;
+}
+
+.on-time {
+  background: #DCFCE7;
+  color: #15803D;
+}
+
+.delayed {
+  background: #FEE2E2;
+  color: #DC2626;
+}
+
+.probability-badge {
+  background: #FFF1E3;
+  color: #E66A00;
+  padding: 5px 12px;
+  border-radius: 16px;
+  font-weight: 600;
+}
+
+.airline-badge {
+  background: #EAF1FD;
+  color: #1F379B;
+  padding: 5px 12px;
+  border-radius: 16px;
+  font-weight: 600;
+}
+
+.recent-flight-data {
+  border-radius: 20px;
+  font-weight: 500;
+  color: dimgrey;
 }
