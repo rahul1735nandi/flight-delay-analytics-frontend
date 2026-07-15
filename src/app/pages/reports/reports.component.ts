@@ -39,10 +39,11 @@ export class ReportsComponent implements OnInit, AfterViewInit {
 ];
 
   dataSource = new MatTableDataSource<AirportDelay>();
-  predictionHistory: any[] = [];
+  predictionHistoryDataSource = new MatTableDataSource<any>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild('historySort') historySort!: MatSort;
 
   ngOnInit(): void {
     this.loadAirportDelay();
@@ -52,6 +53,7 @@ export class ReportsComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+    this.predictionHistoryDataSource.sort = this.historySort;
   }
 
   loadAirportDelay(): void {
@@ -123,7 +125,11 @@ export class ReportsComponent implements OnInit, AfterViewInit {
     this.predictionHistoryService.getPredictionHistory().subscribe({
       next: (response) => {
         console.log("Prediction History", response);
-        this.predictionHistory = response;
+        this.predictionHistoryDataSource.data = response;
+
+        if(this.historySort) {
+          this.predictionHistoryDataSource.sort = this.historySort;
+        }
       },
       error: (error) => {
         console.error("Failed to load prediction history", error);
