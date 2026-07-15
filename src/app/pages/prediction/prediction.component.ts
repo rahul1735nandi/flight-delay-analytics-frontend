@@ -5,6 +5,7 @@ import { AIRLINES } from '../../constants/airlines';
 import { AIRPORTS } from '../../constants/airports';
 import { MONTHS } from '../../constants/months';
 import { DAYS_OF_WEEK } from '../../constants/days';
+import { PredictionHistoryService } from '../../services/prediction-history.service';
 
 @Component({
   selector: 'app-prediction',
@@ -42,7 +43,10 @@ export class PredictionComponent {
   selectedMeridian = '';
 
 
-  constructor(private predictionService: PredictionService) {}
+  constructor(
+    private predictionService: PredictionService,
+    private predictionHistoryService: PredictionHistoryService
+  ) {}
 
   predictFlight(): void {
     let hour = parseInt(this.selectedHour, 10);
@@ -64,6 +68,7 @@ export class PredictionComponent {
       next: (response) => {
         console.log('Prediction response', response);
         this.predictionResult = response;
+        this.predictionHistoryService.invalidPredictionHistoryCache();
       },
       error: (error) => {
         console.error(error?.error?.detail ?? 'Prediction Failed');
