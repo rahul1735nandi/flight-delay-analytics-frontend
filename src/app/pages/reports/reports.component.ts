@@ -44,10 +44,18 @@ export class ReportsComponent implements OnInit, AfterViewInit {
   predictionHistoryDataSource = new MatTableDataSource<any>();
   hasAirportDelayError = false;
   hasPredictionHistoryError = false;
+  private _paginator!: MatPaginator;
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild('historySort') historySort!: MatSort;
+  @ViewChild(MatPaginator)
+
+  set paginator(value: MatPaginator) {
+    if (value) {
+      this._paginator = value;
+      this.dataSource.paginator = value;
+    }
+  }
 
   ngOnInit(): void {
     this.loadAirportDelay();
@@ -55,7 +63,6 @@ export class ReportsComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     this.predictionHistoryDataSource.sort = this.historySort;
   }
