@@ -1,145 +1,161 @@
-<mat-card class="prediction-card">
-  <h2>Flight Delay Prediction</h2>
-  <div *ngIf="predictionResult" class="result-box" [ngClass]="{
-      'delayed-card': predictionResult.is_delayed,
-      'ontime-card': !predictionResult.is_delayed
-    }">
+<div *ngIf="!hasPredictionError; else predictionError">
+  <mat-card class="prediction-card">
+    <h2>Flight Delay Prediction</h2>
+    <div *ngIf="predictionResult" class="result-box" [ngClass]="{
+        'delayed-card': predictionResult.is_delayed,
+        'ontime-card': !predictionResult.is_delayed
+      }">
 
-    <div class="result-header">
-      <div class="result-title">
-        <span class="status-icon">
-          {{ predictionResult.is_delayed ? '⚠️' : '✅' }}
-        </span>
-        <span class="prediction-text">
-          {{ predictionResult.prediction }}
-        </span>
+      <div class="result-header">
+        <div class="result-title">
+          <span class="status-icon">
+            {{ predictionResult.is_delayed ? '⚠️' : '✅' }}
+          </span>
+          <span class="prediction-text">
+            {{ predictionResult.prediction }}
+          </span>
+        </div>
+        <p class="probability-text">
+          Delay Probability:
+          <strong>{{ predictionResult.delay_probability }}%</strong>
+        </p>
       </div>
-      <p class="probability-text">
-        Delay Probability:
-        <strong>{{ predictionResult.delay_probability }}%</strong>
-      </p>
-    </div>
 
-    <div class="close-btn-container">
-      <button class="close-btn" (click)="closeResult()">
-        ✕
-      </button>
-    </div>
-  </div>
-
-  <div class="form-grid">
-    <mat-form-field appearance="outline" [ngClass]="{'invalid-airport': showOriginError(originField)}">
-      <mat-label>Origin Airport</mat-label>
-    
-      <mat-select [(ngModel)]="formData.origin" #originField="ngModel">
-        <mat-option *ngFor="let airport of airports" [value]="airport">
-          {{ airport }}
-        </mat-option>
-      </mat-select>
-    
-      <mat-hint class="airport-hint" *ngIf="showOriginError(originField)">
-        Origin and Destination airports cannot be the same
-      </mat-hint>
-    </mat-form-field>
-    
-    <mat-form-field appearance="outline" [ngClass]="{'invalid-airport': showDestinationError(destField)}">
-    
-      <mat-label>Destination Airport</mat-label>
-    
-      <mat-select [(ngModel)]="formData.dest" #destField="ngModel">
-        <mat-option *ngFor="let airport of airports" [value]="airport">
-          {{ airport }}
-        </mat-option>
-      </mat-select>
-    
-      <mat-hint class="airport-hint" *ngIf="showDestinationError(destField)">
-        Origin and Destination airports cannot be the same
-      </mat-hint>
-    
-    </mat-form-field>
-
-    <mat-form-field appearance="outline">
-      <mat-label>Airline</mat-label>
-      <mat-select [(ngModel)]="formData.airline">
-        <mat-option *ngFor="let airline of airlines" [value]="airline">
-          {{ airline }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <mat-form-field appearance="outline">
-      <mat-label>Month</mat-label>
-      <mat-select [(ngModel)]="formData.month">
-        <mat-option *ngFor="let month of months" [value]="month.value">
-          {{ month.name }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <mat-form-field appearance="outline">
-      <mat-label>Day Of Week</mat-label>
-      <mat-select [(ngModel)]="formData.day_of_week">
-        <mat-option *ngFor="let day of daysOfWeek" [value]="day.value">
-          {{ day.name }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <mat-form-field appearance="outline">
-      <mat-label>Distance</mat-label>
-      <input matInput type="number" min="1" placeholder="Enter Distance" [(ngModel)]="formData.distance">
-      <mat-error *ngIf="formData.distance <= 0">
-        Distance must be greater than 0
-      </mat-error>
-    </mat-form-field>
-
-    <div class="departure-time-wrapper">
-      <label class="time-label">Departure Time</label>
-      <div class="time-picker-container">
-        <mat-form-field appearance="outline" class="hour-field">
-          <mat-label>Hrs</mat-label>
-          <mat-select [(ngModel)]="selectedHour">
-            <mat-option *ngFor="let hour of hours" [value]="hour">
-              {{ hour }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <!-- <span class="time-separator">:</span> -->
-    
-        <mat-form-field appearance="outline" class="minute-field">
-          <mat-label>Min</mat-label>
-          <mat-select [(ngModel)]="selectedMinute">
-            <mat-option *ngFor="let minute of minutes" [value]="minute">
-              {{ minute }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-    
-        <mat-form-field appearance="outline" class="meridian-field">
-          <mat-label>AM/PM</mat-label>
-          <mat-select [(ngModel)]="selectedMeridian">
-            <mat-option *ngFor="let meridian of meridians" [value]="meridian">
-              {{ meridian }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+      <div class="close-btn-container">
+        <button class="close-btn" (click)="closeResult()">
+          ✕
+        </button>
       </div>
     </div>
-  </div>
 
-  <button mat-raised-button color="primary" class="predict-btn" (click)="predictFlight()" [disabled]="
-      !formData.origin ||
-      !formData.dest ||
-      !formData.airline ||
-      !formData.month ||
-      !formData.day_of_week ||
-      formData.origin === formData.dest ||
-      !formData.distance ||
-      formData.distance <= 0 ||
-      !selectedHour ||
-      !selectedMinute ||
-      !selectedMeridian
-    ">
-    Predict Flight
-  </button>
-</mat-card>
+    <div class="form-grid">
+      <mat-form-field appearance="outline" [ngClass]="{'invalid-airport': showOriginError(originField)}">
+        <mat-label>Origin Airport</mat-label>
+      
+        <mat-select [(ngModel)]="formData.origin" #originField="ngModel">
+          <mat-option *ngFor="let airport of airports" [value]="airport">
+            {{ airport }}
+          </mat-option>
+        </mat-select>
+      
+        <mat-hint class="airport-hint" *ngIf="showOriginError(originField)">
+          Origin and Destination airports cannot be the same
+        </mat-hint>
+      </mat-form-field>
+      
+      <mat-form-field appearance="outline" [ngClass]="{'invalid-airport': showDestinationError(destField)}">
+      
+        <mat-label>Destination Airport</mat-label>
+      
+        <mat-select [(ngModel)]="formData.dest" #destField="ngModel">
+          <mat-option *ngFor="let airport of airports" [value]="airport">
+            {{ airport }}
+          </mat-option>
+        </mat-select>
+      
+        <mat-hint class="airport-hint" *ngIf="showDestinationError(destField)">
+          Origin and Destination airports cannot be the same
+        </mat-hint>
+      
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Airline</mat-label>
+        <mat-select [(ngModel)]="formData.airline">
+          <mat-option *ngFor="let airline of airlines" [value]="airline">
+            {{ airline }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Month</mat-label>
+        <mat-select [(ngModel)]="formData.month">
+          <mat-option *ngFor="let month of months" [value]="month.value">
+            {{ month.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Day Of Week</mat-label>
+        <mat-select [(ngModel)]="formData.day_of_week">
+          <mat-option *ngFor="let day of daysOfWeek" [value]="day.value">
+            {{ day.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Distance</mat-label>
+        <input matInput type="number" min="1" placeholder="Enter Distance" [(ngModel)]="formData.distance">
+        <mat-error *ngIf="formData.distance <= 0">
+          Distance must be greater than 0
+        </mat-error>
+      </mat-form-field>
+
+      <div class="departure-time-wrapper">
+        <label class="time-label">Departure Time</label>
+        <div class="time-picker-container">
+          <mat-form-field appearance="outline" class="hour-field">
+            <mat-label>Hrs</mat-label>
+            <mat-select [(ngModel)]="selectedHour">
+              <mat-option *ngFor="let hour of hours" [value]="hour">
+                {{ hour }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <!-- <span class="time-separator">:</span> -->
+      
+          <mat-form-field appearance="outline" class="minute-field">
+            <mat-label>Min</mat-label>
+            <mat-select [(ngModel)]="selectedMinute">
+              <mat-option *ngFor="let minute of minutes" [value]="minute">
+                {{ minute }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+      
+          <mat-form-field appearance="outline" class="meridian-field">
+            <mat-label>AM/PM</mat-label>
+            <mat-select [(ngModel)]="selectedMeridian">
+              <mat-option *ngFor="let meridian of meridians" [value]="meridian">
+                {{ meridian }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <button mat-raised-button color="primary" class="predict-btn" (click)="predictFlight()" [disabled]="
+        !formData.origin ||
+        !formData.dest ||
+        !formData.airline ||
+        !formData.month ||
+        !formData.day_of_week ||
+        formData.origin === formData.dest ||
+        !formData.distance ||
+        formData.distance <= 0 ||
+        !selectedHour ||
+        !selectedMinute ||
+        !selectedMeridian
+      ">
+      Predict Flight
+    </button>
+  </mat-card>
+</div>
+
+<ng-template #predictionError>
+    <mat-card class="prediction-result-card error-card">
+        <mat-icon class="error-icon">
+            cloud_off
+        </mat-icon>
+
+        <h2>Prediction Unavailable</h2>
+        
+        <p>
+            Unable to connect to the prediction service. Please check whether the backend server is running.
+        </p>
+    </mat-card>
+</ng-template>

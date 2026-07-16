@@ -1,6 +1,9 @@
 .sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
   width: 250px;
-  min-height: stretch;
+  height: 100vh;
   background: #0f172a;
   color: white;
   padding: 20px;

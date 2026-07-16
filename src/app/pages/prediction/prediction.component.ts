@@ -41,6 +41,7 @@ export class PredictionComponent {
   selectedHour = '';
   selectedMinute = '';
   selectedMeridian = '';
+  hasPredictionError = false;
 
 
   constructor(
@@ -67,11 +68,13 @@ export class PredictionComponent {
     this.predictionService.predict(this.formData).subscribe({
       next: (response) => {
         console.log('Prediction response', response);
+        this.hasPredictionError = false;
         this.predictionResult = response;
         this.predictionHistoryService.invalidPredictionHistoryCache();
       },
       error: (error) => {
         console.error(error?.error?.detail ?? 'Prediction Failed');
+        this.hasPredictionError = true;
       }
     });
   }
