@@ -2,36 +2,45 @@
   <div class="dashboard-header">
     <div>
       <h1>Dashboard Overview</h1>
-      <p>
-        Monitor airline delays and flight performance
-      </p>
+      <p>Monitor airline delays and flight performance</p>
     </div>
   </div>
 
-  <div *ngIf="!hasDashboardError; else dashboardError">
+  <div
+    *ngIf="
+      dashboardSummary &&
+      !hasDashboardError &&
+      !(loadingService.loading$ | async);
+      else dashboardError
+    "
+  >
+
     <div class="cards-grid">
       <mat-card class="dashboard-card">
         <p>Total Flights</p>
-        <h1>{{ dashboardSummary?.total_flights }}</h1>
+        <h1>{{ dashboardSummary.total_flights }}</h1>
         <span>Total flights in the dataset</span>
       </mat-card>
 
       <mat-card class="dashboard-card">
         <p>Delayed Flights</p>
-        <h1>{{ dashboardSummary?.delayed_flights }}</h1>
-        <span>{{ dashboardSummary?.delay_rate }}% delay rate</span>
+        <h1>{{ dashboardSummary.delayed_flights }}</h1>
+        <span>{{ dashboardSummary.delay_rate }}% delay rate</span>
       </mat-card>
 
       <mat-card class="dashboard-card">
         <p>On-Time Flights</p>
-        <h1>{{ dashboardSummary?.on_time_flights }}</h1>
-        <span>{{ 100 - (dashboardSummary?.delay_rate ?? 0) | number:'1.2-2' }}% success rate</span>
+        <h1>{{ dashboardSummary.on_time_flights }}</h1>
+        <span>
+          {{ 100 - dashboardSummary.delay_rate | number:'1.2-2' }}% success
+          rate
+        </span>
       </mat-card>
 
       <mat-card class="dashboard-card">
         <p>Average Delay</p>
-        <h1>{{ dashboardSummary?.average_delay }} min</h1>
-        <span>Across {{ dashboardSummary?.total_airports }} airports</span>
+        <h1>{{ dashboardSummary.average_delay }} min</h1>
+        <span>Across {{ dashboardSummary.total_airports }} airports</span>
       </mat-card>
     </div>
 
@@ -46,7 +55,6 @@
           [data]="lineChartData"
           [options]="lineChartOptions"
           [type]="'line'">
-
         </canvas>
       </div>
     </mat-card>
@@ -75,7 +83,6 @@
             </td>
           </ng-container>
 
-
           <ng-container matColumnDef="Total_Flights">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>
               Total Flights
@@ -88,7 +95,6 @@
             </td>
           </ng-container>
 
-
           <ng-container matColumnDef="Delayed_Flights">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>
               Delayed Flights
@@ -100,7 +106,6 @@
               </span>
             </td>
           </ng-container>
-
 
           <ng-container matColumnDef="Delay_Rate">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>
@@ -128,7 +133,7 @@
   </div>
 
   <ng-template #dashboardError>
-    <mat-card class="table-card error-card">
+    <mat-card class="table-card error-card" *ngIf="!(loadingService.loading$ | async)">
       <mat-icon color="warn">
         cloud_off
       </mat-icon>

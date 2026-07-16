@@ -5,6 +5,7 @@ import { DashboardService } from '../../services/dashboard.service';
 import { AirportDelay } from '../../models/dashboard.model';
 import { MatSort } from '@angular/material/sort';
 import { PredictionHistoryService } from '../../services/prediction-history.service';
+import { LoadingService } from '../../services/loading.service';
 
 @Component({
   selector: 'app-reports',
@@ -15,7 +16,8 @@ export class ReportsComponent implements OnInit, AfterViewInit {
 
   constructor(
     private dashboardService: DashboardService,
-    private predictionHistoryService: PredictionHistoryService
+    private predictionHistoryService: PredictionHistoryService,
+    public loadingService: LoadingService
   ) {}
 
   displayedColumns: string[] = [

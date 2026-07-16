@@ -10,6 +10,7 @@ import {
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { forkJoin } from 'rxjs';
+import { LoadingService } from '../../services/loading.service';
 
 Chart.register(...registerables);
 
@@ -20,12 +21,13 @@ Chart.register(...registerables);
 })
 export class DashboardComponent implements OnInit, AfterViewInit {
 
-  constructor(private dashboardService: DashboardService) {}
+  constructor(private dashboardService: DashboardService, public loadingService: LoadingService) {}
 
   dashboardSummary?: DashboardSummary;
   airlineDelayData = new MatTableDataSource<AirlineDelay>();
   airportDelayData = new MatTableDataSource<AirportDelay>();
   hasDashboardError = false;
+  isDashboardLoaded = false;
 
     displayedColumns: string[] = [
     'op_unique_carrier',
@@ -96,6 +98,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       next: ({summary, monthlyDelay, airlineDelay, airportDelay}) => {
         console.log("forkjoin response ", summary, monthlyDelay, airlineDelay, airportDelay);
         this.hasDashboardError = false;
+        this.isDashboardLoaded = true;
         this.dashboardSummary = summary;
 
         this.lineChartData.labels = monthlyDelay.map(item => this.getMonthName(item.month));
@@ -108,6 +111,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       error: (error) => {
         console.error('Failed to load dashboard data ', error);
         this.hasDashboardError = true;
+        this.isDashboardLoaded = true;
       }
     })
   }
