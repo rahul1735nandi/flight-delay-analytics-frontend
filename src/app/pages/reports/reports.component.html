@@ -4,6 +4,13 @@
       <h1>Airport Delay Reports</h1>
       <p>Flight delay analytics across major airports</p>
     </div>
+    <span
+      class="retry-link"
+      (click)="retryReports()"
+    >
+      <mat-icon>refresh</mat-icon>
+        Refresh
+    </span>
   </div>
 
   <div *ngIf="!(loadingService.loading$ | async)">

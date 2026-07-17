@@ -4,6 +4,12 @@
   gap: 24px;
 }
 
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
 .dashboard-header h1 {
   margin: 0;
   font-size: 32px;
@@ -14,6 +20,28 @@
 .dashboard-header p {
   margin-top: 6px;
   color: #64748b;
+}
+
+.retry-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #2563eb;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color .2s ease;
+  margin-top: 15px;
+}
+
+.retry-link:hover {
+  color: #1d4ed8;
+}
+
+.retry-link mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
 }
 
 .cards-grid {

@@ -133,4 +133,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     ];
     return months[month - 1]
   }
+
+  retryDashboard(): void {
+    this.hasDashboardError = false;
+    this.loadDashboard();
+  }
 }

@@ -152,4 +152,11 @@ export class ReportsComponent implements OnInit, AfterViewInit {
       }
     })
   }
+
+  retryReports(): void {
+    this.hasAirportDelayError = false;
+    this.hasPredictionHistoryError = false;
+    this.loadAirportDelay();
+    this.loadPredictionHistory();
+  }
 }

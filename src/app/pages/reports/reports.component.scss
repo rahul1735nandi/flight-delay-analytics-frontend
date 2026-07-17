@@ -7,7 +7,7 @@
 .reports-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: baseline;
 }
 
 .reports-header h1 {
@@ -19,6 +19,29 @@
 .reports-header p {
   margin-top: 5px;
   color: #64748b;
+}
+
+.retry-link {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #1976d2;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  user-select: none;
+  transition: color .2s ease;
+}
+
+.retry-link:hover {
+  color: #0d47a1;
+  text-decoration: underline;
+}
+
+.retry-link mat-icon {
+  width: 18px;
+  height: 18px;
+  font-size: 18px;
 }
 
 .table-card {
@@ -90,6 +113,7 @@
 .recent-delay-predicton-table-card {
   overflow: hidden;
   padding: 25px 24px;
+  margin-bottom: 30px;
 }
 
 .history-table-wrapper {
