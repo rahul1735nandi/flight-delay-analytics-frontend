@@ -45,16 +45,21 @@ export class ReportsComponent implements OnInit, AfterViewInit {
   predictionHistoryDataSource = new MatTableDataSource<PredictionHistory>();
   hasAirportDelayError = false;
   hasPredictionHistoryError = false;
-  private _paginator!: MatPaginator;
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild('historySort') historySort!: MatSort;
-  @ViewChild(MatPaginator)
 
-  set paginator(value: MatPaginator) {
-    if (value) {
-      this._paginator = value;
-      this.dataSource.paginator = value;
+  @ViewChild('airportPaginator')
+  set airportPaginator(paginator: MatPaginator) {
+    if (paginator) {
+      this.dataSource.paginator = paginator;
+    }
+  }
+
+  @ViewChild('historyPaginator')
+  set historyPaginator(paginator: MatPaginator) {
+    if(paginator) {
+      this.predictionHistoryDataSource.paginator = paginator;
     }
   }
 
@@ -141,10 +146,6 @@ export class ReportsComponent implements OnInit, AfterViewInit {
         this.hasPredictionHistoryError = false;
         console.log("Prediction History", response);
         this.predictionHistoryDataSource.data = response;
-
-        if(this.historySort) {
-          this.predictionHistoryDataSource.sort = this.historySort;
-        }
       },
       error: (error) => {
         console.error("Failed to load prediction history", error);

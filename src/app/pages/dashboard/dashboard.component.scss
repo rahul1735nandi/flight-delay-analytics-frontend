@@ -91,16 +91,13 @@
 }
 
 .table-container {
-  max-height: 350px;
-  overflow-y: auto;
+  overflow-y: hidden;
 }
 
 th.mat-header-cell,
 .mat-mdc-header-cell {
-  position: sticky;
-  top: 0;
-  z-index: 2;
   background: #add8e6;
+  font-weight: 600;
 }
 
 .dashboard-table {

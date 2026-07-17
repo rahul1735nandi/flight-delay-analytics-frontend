@@ -11,6 +11,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { forkJoin } from 'rxjs';
 import { LoadingService } from '../../services/loading.service';
+import { MatPaginator } from '@angular/material/paginator';
 
 Chart.register(...registerables);
 
@@ -44,6 +45,12 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   ]
 
   @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator)
+  set paginator(paginator: MatPaginator) {
+    if (paginator) {
+      this.airlineDelayData.paginator = paginator;
+    }
+  }
 
   ngOnInit(): void {
     this.loadDashboard();
