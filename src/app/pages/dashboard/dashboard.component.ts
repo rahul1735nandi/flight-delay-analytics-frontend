@@ -29,7 +29,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   hasDashboardError = false;
   isDashboardLoaded = false;
 
-    displayedColumns: string[] = [
+  displayedColumns: string[] = [
     'op_unique_carrier',
     'Total_Flights',
     'Delayed_Flights',
@@ -88,7 +88,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     }
   };
 
-   loadDashboard(): void {
+  loadDashboard(): void {
     forkJoin({
       summary: this.dashboardService.getDashboardSummary(),
       monthlyDelay: this.dashboardService.getMonthlyDelay(),

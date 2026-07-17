@@ -13,7 +13,7 @@ export class PredictionHistoryService {
 
   constructor(private http: HttpClient) { }
 
-  getPredictionHistory(): Observable<any[]> {
+  getPredictionHistory(): Observable<PredictionHistory[]> {
     if(!this.predictionHistoryDirty && this.predictionHistory$) {
       return this.predictionHistory$;
     }

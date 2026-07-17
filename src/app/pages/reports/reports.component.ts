@@ -6,6 +6,7 @@ import { AirportDelay } from '../../models/dashboard.model';
 import { MatSort } from '@angular/material/sort';
 import { PredictionHistoryService } from '../../services/prediction-history.service';
 import { LoadingService } from '../../services/loading.service';
+import { PredictionHistory } from '../../models/prediction.model';
 
 @Component({
   selector: 'app-reports',
@@ -41,7 +42,7 @@ export class ReportsComponent implements OnInit, AfterViewInit {
 ];
 
   dataSource = new MatTableDataSource<AirportDelay>();
-  predictionHistoryDataSource = new MatTableDataSource<any>();
+  predictionHistoryDataSource = new MatTableDataSource<PredictionHistory>();
   hasAirportDelayError = false;
   hasPredictionHistoryError = false;
   private _paginator!: MatPaginator;
