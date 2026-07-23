@@ -30,8 +30,9 @@
 
         <table
           mat-table
-          [dataSource]="dataSource"
+          [dataSource]="airportHistorydataSource"
           matSort
+          #airportHistorySort="matSort"
           class="reports-table">
 
           <ng-container matColumnDef="origin">
@@ -104,8 +105,7 @@
         <h2>No Data Available</h2>
 
         <p>
-          Unable to load airport delay reports.<br>
-          Please check whether the backend server is running.
+          Unable to load airport delay reports. Please check whether the backend server is running.
         </p>
       </mat-card>
     </ng-template>
@@ -283,8 +283,7 @@
         <h2>No Prediction History Available</h2>
 
         <p>
-          Unable to load recent prediction history.<br>
-          Please check whether the backend server is running.
+          Unable to load recent prediction history. Please check whether the backend server is running.
         </p>
       </mat-card>
     </ng-template>

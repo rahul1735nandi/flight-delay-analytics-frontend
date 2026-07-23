@@ -13,7 +13,7 @@ import { PredictionHistory } from '../../models/prediction.model';
   templateUrl: './reports.component.html',
   styleUrl: './reports.component.scss'
 })
-export class ReportsComponent implements OnInit, AfterViewInit {
+export class ReportsComponent implements OnInit {
 
   constructor(
     private dashboardService: DashboardService,
@@ -41,18 +41,29 @@ export class ReportsComponent implements OnInit, AfterViewInit {
   'prediction_time'
 ];
 
-  dataSource = new MatTableDataSource<AirportDelay>();
+  airportHistorydataSource = new MatTableDataSource<AirportDelay>();
   predictionHistoryDataSource = new MatTableDataSource<PredictionHistory>();
   hasAirportDelayError = false;
   hasPredictionHistoryError = false;
 
-  @ViewChild(MatSort) sort!: MatSort;
-  @ViewChild('historySort') historySort!: MatSort;
+  @ViewChild('airportHistorySort')
+  set airportHistorySort(sort: MatSort) {
+    if(sort) {
+      this.airportHistorydataSource.sort = sort;
+    }
+  }
+
+  @ViewChild('historySort')
+  set historySort(sort: MatSort) {
+    if(sort) {
+      this.predictionHistoryDataSource.sort = sort;
+    }
+  }
 
   @ViewChild('airportPaginator')
   set airportPaginator(paginator: MatPaginator) {
     if (paginator) {
-      this.dataSource.paginator = paginator;
+      this.airportHistorydataSource.paginator = paginator;
     }
   }
 
@@ -68,17 +79,12 @@ export class ReportsComponent implements OnInit, AfterViewInit {
     this.loadPredictionHistory();
   }
 
-  ngAfterViewInit(): void {
-    this.dataSource.sort = this.sort;
-    this.predictionHistoryDataSource.sort = this.historySort;
-  }
-
   loadAirportDelay(): void {
     this.dashboardService.getAirportDelay().subscribe({
       next: (response) => {
         console.log("Airport Delay Response ", response);
         this.hasAirportDelayError = false;
-        this.dataSource.data = response;
+        this.airportHistorydataSource.data = response;
       },
       error: (error) => {
         console.error('Failed to load airport delay data ', error);
@@ -89,9 +95,9 @@ export class ReportsComponent implements OnInit, AfterViewInit {
 
   applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    if(this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
+    this.airportHistorydataSource.filter = filterValue.trim().toLowerCase();
+    if(this.airportHistorydataSource.paginator) {
+      this.airportHistorydataSource.paginator.firstPage();
     }
   }
 
