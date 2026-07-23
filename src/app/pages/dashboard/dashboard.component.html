@@ -75,6 +75,7 @@
           mat-table
           [dataSource]="airlineDelayData"
           matSort
+          #airlinehistorySort="matSort"
           class="dashboard-table">
 
           <ng-container matColumnDef="op_unique_carrier">

@@ -20,7 +20,7 @@ Chart.register(...registerables);
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit, AfterViewInit {
+export class DashboardComponent implements OnInit {
 
   constructor(private dashboardService: DashboardService, public loadingService: LoadingService) {}
 
@@ -44,7 +44,13 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     'Delay_Rate'
   ]
 
-  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild('airlinehistorySort')
+  set airlinehistorySort(sort: MatSort) {
+    if(sort) {
+      this.airlineDelayData.sort = sort;
+    }
+  }
+
   @ViewChild(MatPaginator)
   set paginator(paginator: MatPaginator) {
     if (paginator) {
@@ -54,10 +60,6 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.loadDashboard();
-  }
-
-  ngAfterViewInit(): void {
-    this.airlineDelayData.sort = this.sort;
   }
 
   public lineChartData: ChartConfiguration<'line'>['data'] = {
