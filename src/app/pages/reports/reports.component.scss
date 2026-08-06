@@ -24,10 +24,10 @@
 .retry-link {
   display: flex;
   align-items: center;
-  gap: 4px;
-  color: #1976d2;
-  font-size: 14px;
-  font-weight: 500;
+  gap: 6px;
+  color: #2563eb;
+  font-size: 15px;
+  font-weight: 600;
   cursor: pointer;
   user-select: none;
   transition: color .2s ease;
@@ -35,13 +35,12 @@
 
 .retry-link:hover {
   color: #0d47a1;
-  text-decoration: underline;
 }
 
 .retry-link mat-icon {
+  font-size: 18px;
   width: 18px;
   height: 18px;
-  font-size: 18px;
 }
 
 .table-card {

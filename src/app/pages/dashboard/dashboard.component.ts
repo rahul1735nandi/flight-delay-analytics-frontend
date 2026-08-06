@@ -143,8 +143,9 @@ export class DashboardComponent implements OnInit {
     return months[month - 1]
   }
 
-  retryDashboard(): void {
+  refreshDashboard(): void {
     this.hasDashboardError = false;
+    this.dashboardService.refreshDashboard();
     this.loadDashboard();
   }
 }

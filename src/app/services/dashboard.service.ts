@@ -46,4 +46,15 @@ export class DashboardService {
     }
     return this.airportDelay$;
   }
+
+  refreshAirportDelay(): void {
+    this.airportDelay$ = undefined;
+  }
+
+  refreshDashboard(): void {
+    this.dashboardSummary$ = undefined;
+    this.monthlyDelay$ = undefined;
+    this.airlineDelay$ = undefined;
+    this.airportDelay$ = undefined;
+  }
 }

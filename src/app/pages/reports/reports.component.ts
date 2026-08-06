@@ -160,9 +160,11 @@ export class ReportsComponent implements OnInit {
     })
   }
 
-  retryReports(): void {
+  refreshReports(): void {
     this.hasAirportDelayError = false;
     this.hasPredictionHistoryError = false;
+    this.dashboardService.refreshAirportDelay();
+    this.predictionHistoryService.invalidPredictionHistoryCache();
     this.loadAirportDelay();
     this.loadPredictionHistory();
   }
