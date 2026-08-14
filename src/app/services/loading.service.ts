@@ -21,10 +21,10 @@ export class LoadingService {
       this.requestCount--;
     }
     if(this.requestCount === 0) {
-      // this.loadingSubject.next(false);
+      this.loadingSubject.next(false);
       setTimeout(() => {
         this.loadingSubject.next(false);
-      }, 500);
+      }, 1000);
     }
   }
 }
